@@ -1,20 +1,17 @@
 # Use official Python image
-FROM python:3.10
+FROM python:3.9
 
 # Set working directory
 WORKDIR /app
 
 # Copy requirements file
-COPY requirements.txt .
+COPY requirements.txt /app/
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy all files
-COPY . .
+# Copy project files
+COPY . /app/
 
-# Expose the port your Flask app runs on
-EXPOSE 10000
-
-# Start the Flask app
-CMD ["gunicorn", "-b", "0.0.0.0:10000", "app:app"]
+# Run the app
+CMD ["python", "app.py"]
